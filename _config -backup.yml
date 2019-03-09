@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: zhoubichuan的博客
-subtitle: web前端开发
-description: "javascript, node, react, vue, express, koa, egg"
+title: Hexo
+subtitle:
+description:
 keywords:
-author: 周必川
-language: zh-Hans
+author: John Doe
+language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://zhoubichuan.github.io/
+url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -41,7 +41,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace:
   
 # Home page setting
@@ -78,12 +78,6 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:zhoubichuan/.github.io.git
-  branch: master
-
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 1000
+  type:git
+  repo:git@github.com:zhoubichuan/.github.io.git
+  branch:master
