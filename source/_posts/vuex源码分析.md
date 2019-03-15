@@ -1,11 +1,15 @@
 ---
-title: '''vuex源码分析'''
+title: 'vuex源码分析'
 copyright: true
 permalink: 1
 top: 0
 date: 2019-03-02 20:14:19
 categories:
+- vuex
 tags:
+- vue
+- vuex
+- 源码
 ---
 
 ## 一.启动一个 vue 项目

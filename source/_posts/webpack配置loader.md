@@ -1,8 +1,13 @@
 ---
 title: 使用 webpack 打包 css 文件
 date: 2018-12-29 23:23:09
+categories:
+- webpack
 tags:
+- webpack
+- 入门
 ---
+
 # 使用 webpack 打包 css 文件
 
 ## 1.安装 css-loader

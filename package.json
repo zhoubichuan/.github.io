@@ -17,6 +17,10 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.1",
-    "hexo-wordcount": "^6.0.1"
+    "hexo-wordcount": "^2.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.4.10",
+    "postcss-loader": "^3.0.0"
   }
 }

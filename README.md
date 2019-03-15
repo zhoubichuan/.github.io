@@ -8,7 +8,7 @@ hexo init #初始化
 
 hexo publish [layout] <title> #发表草稿。
 
-## 写作
+## 写作hexo
 
 hexo n "name" #新建文章
 hexo g #生成静态网页

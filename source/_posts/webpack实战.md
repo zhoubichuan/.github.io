@@ -1,8 +1,13 @@
 ---
 title: webpack 小案例
 date: 2018-12-29 23:22:42
+categories:
+- webpack
 tags:
+- webpack
+- 入门
 ---
+
 # webpack 小案例
 
 ## 1.搭建环境

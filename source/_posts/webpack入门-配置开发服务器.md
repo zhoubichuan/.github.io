@@ -1,0 +1,62 @@
+---
+title: webpack入门-配置开发服务器
+copyright: true
+permalink: 1
+top: 0
+date: 2019-03-11 23:18:20
+categories:
+- webpack
+tags:
+- webpack
+- 入门
+---
+
+## package.json
+
+```
+{
+  "name": "eg2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack-dev-server --open --mode development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
+```
+
+## webpack.config.js
+
+```
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+//开发服务器配置
+module.exports = {
+  devServer: {
+    contentBase: "./dist",
+    host: "localhost",
+    port: 8080,
+    //服务器返回给浏览器的时候是否启动gzip压缩
+    compress: true
+  }
+};
+```
+
+## 运行
+
+```
+npm run dev
+```
+
+打开http://localhost:8080
+
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/1.base/eg3)
