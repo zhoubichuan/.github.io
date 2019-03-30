@@ -1,0 +1,57 @@
+---
+title: webpack-小插件应用
+copyright: true
+permalink: 1
+top: 0
+date: 2019-03-21 12:15:18
+categories:
+- webpack
+tags:
+- webpack
+- 小插件
+---
+
+## 1.cleanWebpackPlugin(每次打包前清除 dist 目录文件)
+
+### 1.安装
+
+```
+npm i clean-webpack-plugin -D
+```
+
+### 2.配置
+
+```
+let CleanWebpackPlugin = require("clean-webpack-plugin");
+new CleanWebpackPlugin(),
+```
+
+## 2.copyWebpackPlugin（将文件夹拷贝到 dist 目录）
+
+### 1.安装
+
+```
+npm i copy-webpack-plugin -D
+```
+
+### 2.配置
+
+```
+let CopyWebpackPlugin = require("copy-webpack-plugin");
+new CopyWebpackPlugin([{ from: "./doc", to: "./" }]),
+```
+
+## 3.bannerPlugin（版权声明）
+
+### 1.安装
+
+webpack 内置的，直接用
+
+### 2.配置
+
+```
+new webpack.BannerPlugin("autor 2019 3 17")
+let webpack = require("webpack");
+```
+
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/2.config/4.plugin)

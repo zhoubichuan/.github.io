@@ -1,0 +1,100 @@
+---
+title: webpack-图片处理
+copyright: true
+permalink: 1
+top: 0
+date: 2019-03-16 22:37:23
+categories:
+- webpack
+tags:
+- webpack
+- 基础
+- 图片处理
+---
+
+## 安装
+
+js 中引入图片需要安装
+
+```
+cnpm i file-loader -D
+```
+
+html 中引入图片需要安装
+
+```
+cnpm i html-withimg-loader -D
+```
+
+css 不需要做处理
+
+图片过小打包成 base64 位需要安装
+
+```
+cnpm i url-loader
+```
+
+## 文件
+
+src/logo.png
+
+## 配置
+
+js 中引入图片需要配置
+
+```
+{
+    test: /\.(png|jpg|gif)$/,
+    use: {
+        loader: "url-loader",
+        options: {
+        limit: 200 * 1024
+        }
+    }
+},
+```
+
+html 中引入图片需要配置
+
+```
+{
+    test: /\.html$/,
+    use: "html-withimg-loader"
+},
+```
+
+打包成 base64 位需要配置
+
+```
+// {
+//   test: /\.(png|jpg|gif)$/,
+//   use: "file-loader"
+// },
+{
+test: /\.(png|jpg|gif)$/,
+    use: {
+        loader: "url-loader",
+        options: {
+        limit: 200 * 1024
+        }
+    }
+},
+```
+
+## 运行
+
+```
+npm run dev
+```
+
+页面有三张图片
+
+## 打包
+
+```
+npm run build
+```
+
+打开页面，图片为 base64 格式
+
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/1.base/9.image)
