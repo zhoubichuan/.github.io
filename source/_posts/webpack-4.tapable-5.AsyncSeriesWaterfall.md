@@ -1,0 +1,99 @@
+---
+title: webpack-AsyncSeriesWaterfall
+copyright: true
+permalink: 1
+top: 0
+date: 2019-03-30 20:31:57
+categories:
+- webpack
+tags:
+- webpack
+- tapable
+- AsyncSeriesWaterfall
+---
+
+## AsyncSeriesWaterfall
+
+### 1.使用
+
+```
+let { AsyncSeriesWaterfallHook } = require("tapable");
+class Lesson {
+  constructor() {
+    this.index = 0;
+    this.hooks = { arch: new AsyncSeriesWaterfallHook(["name"]) };
+  }
+  tap() {
+    this.hooks.arch.tapAsync("node", (name, cb) => {
+      setTimeout(() => {
+        console.log("node", name);
+        cb(null, "result");
+      }, 1000);
+    });
+    this.hooks.arch.tapAsync("react", (name, cb) => {
+      setTimeout(() => {
+        console.log("react", name);
+        cb("asdf");
+      }, 1000);
+    });
+  }
+  statr() {
+    this.hooks.arch.callAsync("123", function() {
+      console.log("end");
+    });
+  }
+}
+let l = new Lesson();
+l.tap(); //注册这两个事件
+l.statr(); //启动钩子;
+```
+
+### 2.原理
+
+```
+class AsyncSeriesWaterfallHook {
+  //同步方法
+  constructor(args) {
+    //args => ['name']
+    this.tasks = [];
+  }
+  tapAsync(name, task) {
+    this.tasks.push(task);
+  }
+  callAsync(...args) {
+    let finalCallback = args.pop();
+    let index = 0;
+    let next = (err, data) => {
+      let task = this.tasks[index];
+      if (!task) return finalCallback();
+      if (index == 0) {
+        task(...args, next);
+      } else {
+        task(data, next);
+      }
+      index++;
+    };
+    next();
+  }
+}
+let hook = new AsyncSeriesWaterfallHook(["name"]);
+let total = 0;
+hook.tapAsync("node", (name, cb) => {
+  setTimeout(() => {
+    console.log("node", name);
+    cb(null, "结果");
+  }, 1000);
+});
+hook.tapAsync("react", (data, cb) => {
+  setTimeout(() => {
+    console.log("react", data);
+    cb(null);
+  }, 1000);
+});
+
+hook.callAsync("123", function() {
+  console.log("end");
+});
+```
+
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/3.optimize/5.AsyncSeriesWaterfall)

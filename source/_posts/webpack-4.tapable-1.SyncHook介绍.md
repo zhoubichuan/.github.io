@@ -8,8 +8,8 @@ categories:
 - webpack
 tags:
 - webpack
-- 优化
 - tapable
+- SyncHook
 ---
 
 ## 使用
