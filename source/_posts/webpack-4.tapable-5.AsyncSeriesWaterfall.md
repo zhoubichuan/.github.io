@@ -96,4 +96,4 @@ hook.callAsync("123", function() {
 });
 ```
 
-[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/3.optimize/5.AsyncSeriesWaterfall)
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/4.tapable/5.AsyncSeriesWaterfall)

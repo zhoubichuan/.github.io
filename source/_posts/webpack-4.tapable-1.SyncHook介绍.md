@@ -84,4 +84,4 @@ hook.tap("react", function(name) {
 hook.call("123");
 ```
 
-[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/3.optimize/9.tapable)
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/4.tapable/1.SyncHook)

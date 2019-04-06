@@ -179,4 +179,4 @@ hook.promise("123").then(function() {
 });
 ```
 
-[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/3.optimize/3.AsyncParralleHook)
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/4.tapable/3.AsyncParralleHook)

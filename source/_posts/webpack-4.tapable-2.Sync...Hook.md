@@ -208,4 +208,4 @@ hook.tap("webpack", function(name) {
 hook.call("123");
 ```
 
-[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/3.optimize/2.Sync...Hook)
+[完整代码](https://github.com/zhoubichuan/frontend-note/tree/master/3.dev/3.scaffolding/1.webpack/4.tapable/2.Sync...Hook)
