@@ -1,5 +1,5 @@
 ---
-title: vue-1.基础-2.常见的指令
+title: vue中常见的指令
 copyright: true
 permalink: 1
 top: 0

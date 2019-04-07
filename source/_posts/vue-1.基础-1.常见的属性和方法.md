@@ -1,5 +1,5 @@
 ---
-title: vue-1.base
+title: vue中常见的属性和方法
 copyright: true
 permalink: 1
 top: 0
