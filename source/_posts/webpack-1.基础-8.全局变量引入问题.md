@@ -5,7 +5,12 @@ permalink: 1
 top: 0
 date: 2019-03-16 22:47:01
 categories:
+- 前端开发
+- 开发环境
+- 构建工具
+- webpack
 tags:
+- 全局变量引入的问题
 ---
 
 # jquery 引入的几种方式（在处理 js 语法的基础上改）

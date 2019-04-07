@@ -5,7 +5,12 @@ permalink: 1
 top: 0
 date: 2019-03-25 22:23:06
 categories:
+- 前端开发
+- 开发环境
+- 构建工具
+- webpack
 tags:
+- 区分不同的环境
 ---
 
 ## 安装

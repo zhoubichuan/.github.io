@@ -2,7 +2,10 @@
 title: 实现三栏布局
 date: 2018-12-23 21:31:53
 categories: 
-- web静态页面
+- 前端开发
+- 标准
+- W3C
+- HTML
 tags:
 - 静态页面
 - html

@@ -2,7 +2,10 @@
 title: 元素上下左右居中
 date: 2018-12-23 21:35:29
 categories:
-- web静态页面
+- 前端开发
+- 标准
+- W3C
+- HTML
 tags:
 - 静态页面
 - css

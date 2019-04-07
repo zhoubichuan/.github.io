@@ -2,6 +2,9 @@
 title: http-轮询
 date: 2019-01-01 15:59:59
 categories:
+- 前端开发
+- 标准
+- W3C
 - http
 tags:
 - http

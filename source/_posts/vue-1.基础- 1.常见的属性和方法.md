@@ -1,0 +1,48 @@
+---
+title: vue-1.base
+copyright: true
+permalink: 1
+top: 0
+date: 2018-04-07 14:59:29
+categories:
+- 前端开发
+- 基础知识
+- 框架
+- vue
+tags:
+- vue基础
+- 常见的属性和方法
+---
+## 安装
+```
+yarn add vue
+```
+
+## vue中常见的属性和方法
+- vm.$set()给data设置新的值
+```
+vm.$set(vm.info,'address','hello1')
+```
+- vm.$watch()监听变化，多次更新只会触发一次
+```
+vm.$watch('info.xxx',function(newValue,oldValue){
+    console.log(newValue,oldValue)
+})
+vm.info.xxx="nnnnn"
+```
+- vm.mount()
+```
+let vm=new Vue({
+    data:{state:{count:0}}
+})
+vm.$mount("#app")
+```
+- vm.$nextTick();
+```
+vm.arr=[4,3,5,6]
+vm.arr=[7,9,0]
+vm.$nextTick(()=>{
+    console.log(vm.$el.innerHTML)
+    console.log(vm.$options)
+})
+```

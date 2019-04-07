@@ -5,6 +5,10 @@ permalink: 1
 top: 0
 date: 2019-03-02 20:14:19
 categories:
+- 前端开发
+- 基础知识
+- 框架
+- vue
 - vuex
 tags:
 - vue
