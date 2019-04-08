@@ -14,6 +14,8 @@ tags:
 - plugin
 - 打包后自动发布
 ---
+## 首先注册七牛云
+https://portal.qiniu.com/signup?code=3lj1zdy4i742a
 ## 安装
 package.json
 ```
