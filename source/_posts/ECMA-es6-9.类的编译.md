@@ -1,9 +1,9 @@
 ---
-title: es6-5.展开运算符
+title: es6-9.类的编译
 copyright: true
 permalink: 1
 top: 0
-date: 2019-04-06 18:48:29
+date: 2016-06-09 18:49:23
 categories:
 - 前端开发
 - 标准

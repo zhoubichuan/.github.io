@@ -1,9 +1,9 @@
 ---
-title: es6-10.类的继承
+title: es6-5.展开运算符
 copyright: true
 permalink: 1
 top: 0
-date: 2019-04-06 18:49:37
+date: 2016-06-05 18:48:29
 categories:
 - 前端开发
 - 标准

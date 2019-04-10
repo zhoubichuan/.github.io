@@ -1,9 +1,9 @@
 ---
-title: es6-7.对象
+title: es6-6.数组的方法
 copyright: true
 permalink: 1
 top: 0
-date: 2019-04-06 18:48:54
+date: 2016-06-06 18:48:43
 categories:
 - 前端开发
 - 标准

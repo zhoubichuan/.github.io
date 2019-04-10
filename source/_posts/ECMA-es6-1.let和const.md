@@ -3,18 +3,19 @@ title: 你真的了解es6的let吗
 copyright: true
 permalink: 1
 top: 0
-date: 2019-04-06 18:46:41
+date: 2016-06-01 18:46:41
 categories:
 - 前端开发
 - 标准
 - ECMA
 - ES6
+- 1.你真的了解es6的let吗
 tags:
 - ES6
 - let
+- const
 ---
-## let
-
+![](http://pplgarg0j.bkt.clouddn.com/es6-1-let%E5%92%8Cconst1.jpg)
 ### 首先看一段代码
 ```
 for (var i = 0; i < 3; i++) {
@@ -110,3 +111,98 @@ Uncaught ReferenceError: i is not defined
 let支持块级作用域声明的变量只会声明在当前的作用域内
 
 let 可以解决作用域污染的问题 和局部作用域的问题
+
+## 在同一个作用域下可以多次声明同一个变量(let不能重复声明)
+代码：
+```
+var a =1
+function b(){
+  var a=2
+  var a =4
+}
+b()
+```
+在浏览器上正常运行
+
+代码：
+```
+var a =1
+function b(){
+  let a=2
+  let a =4
+}
+b()
+```
+在浏览器上运行会报错：提示a已经被声明过了
+
+在不同的作用域声明同一个变量是可以的
+```
+let a =1
+function b(){
+  let a=2
+}
+b()
+```
+
+如果用let声明过了 就不要再 用var了
+```
+function b(){
+  let a=2
+  var a =4
+}
+b()
+```
+在浏览器中运行会报错
+
+## 预解释问题，变量提升(let 不存在这个问题，用let解决这个问题)
+```
+console.log(a)
+var a =1;
+console.log(a)
+```
+结果：
+```
+undefiend
+1
+```
+### 暂存死区
+如果作用域内有这样一个变量，这个作用域内就会绑定这个变量，不会继续向上查找
+```
+let a=1;
+{
+  console.log(a);
+  let a =2;
+}
+```
+浏览器中运行：
+```
+ a is not defined
+```
+console.log(a)首先会在{}这个作用域中查找a变量，因为a在这个作用域中已经声明过，但是let没有变量提升，所有会报错
+
+同样
+```
+let a=1;
+{
+  console.log(a);
+  a =2;
+}
+```
+浏览器中会作用域上面查找
+```
+1
+```
+
+## const 和let基本一致
+const声明的变量不能修改，不能被修改引用空间
+```
+const a =1
+a=2
+```
+这样会报错
+
+```
+const a ={age:12}
+a.age=5
+```
+这样是ok的

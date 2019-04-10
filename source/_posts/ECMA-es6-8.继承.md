@@ -3,7 +3,7 @@ title: es6-8.继承
 copyright: true
 permalink: 1
 top: 0
-date: 2019-04-06 18:49:04
+date: 2016-06-08 18:49:04
 categories:
 - 前端开发
 - 标准
