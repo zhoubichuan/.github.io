@@ -6,4 +6,5 @@ tags:
 copyright: true
 permalink: 01
 top: 0
+copyright: true
 ---
