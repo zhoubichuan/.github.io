@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title></title>
+    <url>/2021/01/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/9.%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/%E8%BF%90%E7%BB%B4/1.%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/08/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/2.webview/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83-2.webview-2.hybrid-xxx/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>响应式</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>http-iframe流</title>
+    <url>/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2.%E6%A0%87%E5%87%86-W3C-http-iframe%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h1><h3 id="通过在-html-页面里嵌入一个隐藏的-iframe，然后将这个-iframe-的-src-属性设为对一个长连接的请求，服务器端就能源源不断地向客户端推送数据。"><a href="#通过在-html-页面里嵌入一个隐藏的-iframe，然后将这个-iframe-的-src-属性设为对一个长连接的请求，服务器端就能源源不断地向客户端推送数据。" class="headerlink" title="通过在 html 页面里嵌入一个隐藏的 iframe，然后将这个 iframe 的 src 属性设为对一个长连接的请求，服务器端就能源源不断地向客户端推送数据。"></a>通过在 html 页面里嵌入一个隐藏的 iframe，然后将这个 iframe 的 src 属性设为对一个长连接的请求，服务器端就能源源不断地向客户端推送数据。</h3><p><img src="/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2/iframeflow.png"></p>
+<p>##案例</p>
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><ul>
+<li>html</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;div <span class="attribute">id</span>=<span class="string">&quot;clock&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;iframe <span class="attribute">src</span>=<span class="string">&quot;/clock&quot;</span> <span class="attribute">frameborder</span>=<span class="string">&quot;0&quot;</span> <span class="attribute">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">let express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line">let app = express();</span><br><span class="line">app.use(express.static(__dirname));</span><br><span class="line">app.get(<span class="string">&quot;/clock&quot;</span>, <span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    let date = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString();</span><br><span class="line">    res.write(`</span><br><span class="line"><span class="javascript">        &lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">        parent.document.getElementById(<span class="string">&#x27;clock&#x27;</span>).innerHTML=<span class="string">&quot;$&#123;date&#125;&quot;</span></span></span><br><span class="line"><span class="javascript">        &lt;/script&gt;</span></span><br><span class="line"><span class="javascript">        </span>`);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>http</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+        <tag>半双工</tag>
+        <tag>iframe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>http-轮询</title>
+    <url>/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2.%E6%A0%87%E5%87%86-W3C-http-%E8%BD%AE%E8%AF%A2/</url>
+    <content><![CDATA[<h1 id="轮询"><a href="#轮询" class="headerlink" title="轮询"></a>轮询</h1><h3 id="轮询是客户端和服务器之间会一直进行连接，每隔一段时间就询问一次"><a href="#轮询是客户端和服务器之间会一直进行连接，每隔一段时间就询问一次" class="headerlink" title="轮询是客户端和服务器之间会一直进行连接，每隔一段时间就询问一次"></a>轮询是客户端和服务器之间会一直进行连接，每隔一段时间就询问一次</h3><h3 id="这种范式连接数会很多，一个接受，一个发送。而且每次发送请求都会有-http-的-header，会很耗流量，也会消耗-cpu-的利用率。"><a href="#这种范式连接数会很多，一个接受，一个发送。而且每次发送请求都会有-http-的-header，会很耗流量，也会消耗-cpu-的利用率。" class="headerlink" title="这种范式连接数会很多，一个接受，一个发送。而且每次发送请求都会有 http 的 header，会很耗流量，也会消耗 cpu 的利用率。"></a>这种范式连接数会很多，一个接受，一个发送。而且每次发送请求都会有 http 的 header，会很耗流量，也会消耗 cpu 的利用率。</h3><p><img src="/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2/polling.jpg" alt="轮询"></p>
+<h2 id="案例代码"><a href="#案例代码" class="headerlink" title="案例代码"></a>案例代码</h2><ul>
+<li>客户端定时发送 ajax 请求后端接口，后端返回此时的时间</li>
+</ul>
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><ul>
+<li>html</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">&quot;clock&quot;</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> clockDiv = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;clock&#x27;</span>)</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest;</span><br><span class="line">    xhr.open(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/clock&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span> &amp;&amp; xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">            clockDiv.innerHTML = xhr.responseText</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.send()</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> app=express()</span><br><span class="line">app.use(express.static(__dirname))</span><br><span class="line">app.get(<span class="string">&#x27;/clock&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">  res.end(<span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString())</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(<span class="number">8080</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务器，浏览器打开-http-localhost-8080-index-html"><a href="#启动服务器，浏览器打开-http-localhost-8080-index-html" class="headerlink" title="启动服务器，浏览器打开 http://localhost:8080/index.html"></a>启动服务器，浏览器打开 <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a></h3><p><img src="/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2/result.png"></p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>http</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+        <tag>半双工</tag>
+        <tag>轮询</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>http-长轮询</title>
+    <url>/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2.%E6%A0%87%E5%87%86-W3C-http-%E9%95%BF%E8%BD%AE%E8%AF%A2/</url>
+    <content><![CDATA[<h1 id="长轮询"><a href="#长轮询" class="headerlink" title="长轮询"></a>长轮询</h1><h3 id="长轮询是对轮询的改进版，客户端发送-http-给服务器之后，看有没有新消息，如果没有新消息，就一直等待。"><a href="#长轮询是对轮询的改进版，客户端发送-http-给服务器之后，看有没有新消息，如果没有新消息，就一直等待。" class="headerlink" title="长轮询是对轮询的改进版，客户端发送 http 给服务器之后，看有没有新消息，如果没有新消息，就一直等待。"></a>长轮询是对轮询的改进版，客户端发送 http 给服务器之后，看有没有新消息，如果没有新消息，就一直等待。</h3><h3 id="当有新消息的时候，才会返回给客户端。在某种程度上减小了网络带宽和-cup-利用率等问题。"><a href="#当有新消息的时候，才会返回给客户端。在某种程度上减小了网络带宽和-cup-利用率等问题。" class="headerlink" title="当有新消息的时候，才会返回给客户端。在某种程度上减小了网络带宽和 cup 利用率等问题。"></a>当有新消息的时候，才会返回给客户端。在某种程度上减小了网络带宽和 cup 利用率等问题。</h3><h3 id="由于-http-数据包的头部数据量往往很大（通常有-400-多个字节），但是真正被服务器需要的数据却很少（有的只有-10-个字节左右），这样的数据包在网络上周期性的传输，难免对网络带宽是一种浪费。"><a href="#由于-http-数据包的头部数据量往往很大（通常有-400-多个字节），但是真正被服务器需要的数据却很少（有的只有-10-个字节左右），这样的数据包在网络上周期性的传输，难免对网络带宽是一种浪费。" class="headerlink" title="由于 http 数据包的头部数据量往往很大（通常有 400 多个字节），但是真正被服务器需要的数据却很少（有的只有 10 个字节左右），这样的数据包在网络上周期性的传输，难免对网络带宽是一种浪费。"></a>由于 http 数据包的头部数据量往往很大（通常有 400 多个字节），但是真正被服务器需要的数据却很少（有的只有 10 个字节左右），这样的数据包在网络上周期性的传输，难免对网络带宽是一种浪费。</h3><p><img src="/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2/longpolling.png"></p>
+<h2 id="案例代码"><a href="#案例代码" class="headerlink" title="案例代码"></a>案例代码</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ul>
+<li>html</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">&quot;clock&quot;</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>js</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> clockDiv = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;clock&#x27;</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest;</span><br><span class="line">        xhr.open(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/clock&#x27;</span>, <span class="literal">true</span>)</span><br><span class="line">        xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (xhr.status == <span class="number">200</span>) &#123;</span><br><span class="line">                    clockDiv.innerHTML = xhr.responseText</span><br><span class="line">                &#125;</span><br><span class="line">                send()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.timeout = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            send()</span><br><span class="line">        &#125;</span><br><span class="line">        xhr.send()</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line">send()</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">let express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line">let app = express();</span><br><span class="line">app.use(express.static(__dirname))</span><br><span class="line">app.get(<span class="string">&#x27;/clock&#x27;</span>,<span class="function"><span class="params">(req,res)</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    res.end(<span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString())</span><br><span class="line">  &#125;,<span class="number">3000</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动服务器，浏览器打开-http-localhost-8080-index-html"><a href="#启动服务器，浏览器打开-http-localhost-8080-index-html" class="headerlink" title="启动服务器，浏览器打开 http://localhost:8080/index.html"></a>启动服务器，浏览器打开 <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a></h3><p><img src="/2019/01/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2/result.png"></p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>http</category>
+      </categories>
+      <tags>
+        <tag>http</tag>
+        <tag>半双工</tag>
+        <tag>长轮询</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/07/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/2.webview/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83-2.webview-1.hybrid-xxx/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>响应式</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>socket.io使用案例</title>
+    <url>/2018/12/31/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/3.node/2.%E6%A0%87%E5%87%86-W3C-socket-io%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>同步异步阻塞非阻塞</title>
+    <url>/2019/08/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/8.nginx/1.%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>3.开发环境</category>
+        <category>8.nginx</category>
+        <category>1.同步异步阻塞非阻塞</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>同步异步阻塞非阻塞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3.正向代理与反向代理</title>
+    <url>/2019/08/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/8.nginx/3.%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>ngin 在应用程序中的作用</p>
+<ul>
+<li>解决跨域</li>
+<li>请求过滤</li>
+<li>配置 gzip</li>
+<li>负载均衡</li>
+<li>静态资源服务器</li>
+</ul>
+<p>nginx 现在几乎是众多大型网站的必用技术，大多数情况下，我们不需要亲自去配置它，但是了解它在应用程序中所担任的角色，以及如何解决这些问题是非常必要的。</p>
+<p>下面我将从 nginx 在企业中的知识应用来解释 nginx 在应用程序中起到的作用。</p>
+<p>为了便于理解，首先先来了解一下基础知识，<code>nginx是一个高性能的反向代理服务器</code></p>
+<h3 id="正向代理与反向代理"><a href="#正向代理与反向代理" class="headerlink" title="正向代理与反向代理"></a>正向代理与反向代理</h3><p><code>代理</code>是在服务器和客户端之间假设的一层服务器，<code>代理</code>将接收客户端的请求并将它转发给服务器，让后将服务端的响应转发给客户端。</p>
+<h4 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h4><p>正向代理，意思是一个位于客户端和原始服务器之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标（原始服务器），然后代理向原始服务器转交请求并将获得的内容返归给客户端。</p>
+<p>正向代理是为我们服务的，即为客户端服务的，客户端可以根据正向代理访问到她本身无法访问到的服务器资源。</p>
+<p>正向代理对我们是透明的，对服务端是非透明的，即服务端并不知道自己收到的是来自代理的访问还是来自真实客户端的访问。</p>
+<p>反向代理</p>
+<p>反向代理是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给 internet 上请求连接客户端，此时代理服务器对外表现为一个反向代理服务器。</p>
+<p>反向代理是为服务端服务的，反向代理可以帮助服务器接受来自客户端的请求，帮助服务器做请求转发，负载均衡等。</p>
+<p>反向代理对服务端是透明的，对我们是非透明的，即我们并不知道自己访问的是代理服务器，而服务器知道反向代理在为他服务。</p>
+<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h3><h4 id="配置结构"><a href="#配置结构" class="headerlink" title="配置结构"></a>配置结构</h4><ul>
+<li>main:nginx 的全局配置，对全局生效</li>
+<li>events:配置影响 nginx 服务器或与用户的网路连接。</li>
+<li>http:可以嵌套多个 server,配置代理，缓存，日志定义等大多数功能和第三方模块的配置。</li>
+<li>location：配置虚拟主机的相关参数，一个 http 可以有多个 server</li>
+<li>upstream:配置后端服务器具体地址，负载均衡配置不可或缺的部分。</li>
+</ul>
+<h4 id="请求跨域"><a href="#请求跨域" class="headerlink" title="请求跨域"></a>请求跨域</h4><ul>
+<li><p>前端 server 的域名为：<code>fe.server.com</code></p>
+</li>
+<li><p>后端服务的域名为：<code>dev.server.com</code></p>
+<p>现在我在<code>fe.server.com</code>对<code>dev.server.com</code>发起请求一定会出现跨域</p>
+<p>现在我们只需要启动一个 nginx 服务器，将<code>server_name</code>设置为<code>fe.server.com</code>，然后设置相应的 location 以拦截前端需要跨域的请求，最后将请求代理回<code>dev.server.com</code></p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">	<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">	<span class="attribute">server_name</span> fe.server.com;</span><br><span class="line">	<span class="attribute">location</span> / &#123;</span><br><span class="line">		<span class="attribute">proxy_pass</span> dev.server.com</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这样可以完美绕过浏览器的同源策略：<code>fe.server.com</code>访问<code>nginx</code>的<code>fe.server.com</code>属于同源访问，而<code>nginx</code>对服务端转发的请求不会触发浏览器的同源策略。</p>
+<h4 id="请求过滤"><a href="#请求过滤" class="headerlink" title="请求过滤"></a>请求过滤</h4><p>根据状态码过滤</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">error_page <span class="number">500</span> <span class="number">501</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> <span class="number">506</span> /<span class="number">50</span>x.html;</span><br><span class="line">	<span class="keyword">location</span> <span class="title">= /50x</span>.html &#123;</span><br><span class="line">		root /root/static/html;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据 URL 名称过滤，精准匹配 URL，不匹配的 URL 全部重定向到主页</p>
+<h4 id="配置-gzip"><a href="#配置-gzip" class="headerlink" title="配置 gzip"></a>配置 gzip</h4><p>GZIP 是规定的三种标准 http 压缩格式之一，目前绝大多数的网站都在使用 GZIP 传输 HTML、CSS、JavaScript 等资源文件。</p>
+<p>对于文本文件，GZIP 的效果非常明显，卡其后传输所需的流量大约会将至 1/4~1/3</p>
+<p>并不是每个浏览器都支持 gzip 的，如何知道客户端是否支持 gzip 呢，请求头中 Accept-Encoding 来标识对压缩的支持。</p>
+<p>启用 gzip 同时需要客户端和服务端的支持，如果客户端支持 gzip 的解析，那么指定要服务端能够返回 gzip 的文件就可以启用 gzip 了，我们可以通过 nginx 的配置来让服务端支持 gzip.下面的 response 中 content-encoding:gzip，指服务端开启了 gzip 的压缩方式。</p>
+<h5 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h5><ul>
+<li>开启或者关闭 gzip 模块</li>
+<li>默认值为 off</li>
+<li>可以配置 on/off</li>
+</ul>
+<h5 id="gzip-http-version"><a href="#gzip-http-version" class="headerlink" title="gzip_http_version"></a>gzip_http_version</h5><ul>
+<li>启用 gzip 所需的 http 最低版本</li>
+<li>默认值为 http/1.1</li>
+</ul>
+<p>这里为什么默认版本不是 1.0 呢</p>
+<p>http 运行在 tcp 连接之上，自然也有着 tcp 一样的三次握手，慢启动等特性。</p>
+<p>启用持久连接情况下，服务器发出响应后让 tcp 连接继续打开着，同一对客户/服务器之间的后续请求和响应可以通过这个连接发送请求。</p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>3.开发环境</category>
+        <category>8.nginx</category>
+        <category>3.正向代理与反向代理</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>3.正向代理与反向代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>进程和线程</title>
+    <url>/2019/08/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/8.nginx/2.%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>进程<code>Process</code>是计算机中的程序关于某数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位，是操作系统结构的基础，进程是线程的容器。进程是资源分配的最小单位。我们启动一个服务，运行一个实列，就是开一个服务进程，Node.js里通过<code>node app.js</code>开启一个服务进程，多进程就是复制（fork）,fork出来的每个进程都拥有自己的独立空间地址、数据栈，一个进程无法访问另一个进程里定义的变量，数据结构，只有建立IPC通信，进程之间才可以共享数据。</p>
+<ul>
+<li><p>Node.js中开启进程</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">const http=<span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line">const server=http.createServer()</span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	process.title=<span class="string">&quot;123&quot;</span>;</span><br><span class="line">	<span class="built_in">console</span>.log(process.pid)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>线程是操作系统能够进行运算调度的最小单位，首先线程是属于进程的，一个进程可以有多个线程，但一个线程只能有一个进程。</p>
+<h5 id="单线程：一个进程只开一个线程"><a href="#单线程：一个进程只开一个线程" class="headerlink" title="单线程：一个进程只开一个线程"></a>单线程：一个进程只开一个线程</h5><p>JavaScript就是属于单线程，程序按顺序执行（先不讨论异步），上面的执行完成后才能执行下面的，当使用单线程语言编码时切勿有过多耗时的同步操作，否则线程会造成阻塞，导致线程阻塞，所以进行编码时，尽可能使用异步操作。</p>
+<p>eg:同步任务耗时造成线程阻塞</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http=<span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> longComputation=<span class="function">()=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> sum=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">1e10</span>;i++)&#123;</span><br><span class="line">		sum +=<span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> server=http.createServer()</span><br><span class="line">server.on(<span class="string">&#x27;request&#x27;</span>,<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(req.url===<span class="string">&#x27;/compute&#x27;</span>)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;start&#x27;</span>,<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line">		<span class="keyword">const</span> sum=lognComputation()</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;end&#x27;</span>,<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line">		<span class="keyword">return</span> res.end(<span class="string">`Sum is <span class="subst">$&#123;sum&#125;</span>`</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		res.end(<span class="string">&#x27;Ok&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当我们调用<code>/compute</code>的时候，如果想调用其他的路由地址比如<code>/</code>大约需要15s时间，也可以说一个用户请求完第一个<code>compute</code>接口后需要等待15秒，这对于用户来说是极其不友好的。</p>
+<p>单线程的一些说明</p>
+<ul>
+<li><p>Node.js虽然是单线程模型，但是其基于事件驱动、异步非阻塞模式，可以应用于高并发场景，避免了线程创建、线程之间上下文切换所产生的资源开销。</p>
+</li>
+<li><p>当你的项目中需要有大量计算，CPU耗时的操作的时候，要注意考虑开启多进程来完成</p>
+</li>
+<li><p>Node.js开发过程中，错误会引起整个应用退出，应用的健壮性值得考验，尤其是错误的异常抛出，以及进程守护是必须做的。</p>
+</li>
+<li><p>单线程无法利用多核CPU，但是后来Node.js提供的API以及一些第三方工具相应都得到解决。</p>
+</li>
+</ul>
+<h3 id="Node-js中的进程与线程"><a href="#Node-js中的进程与线程" class="headerlink" title="Node.js中的进程与线程"></a>Node.js中的进程与线程</h3><p>Node.js是JavaScript在服务端的运行环境，构建在chrome的V8引擎之上，基于事件驱动、非阻塞I/O模型，充分利用操作系提供的异步I/O进行多任务的执行，适合于I/O密集型的应用场景，因为异步，程序无需阻塞等待结果返回，而是基于回调通知的机制，原本同步模式等待的时间，则可以用来处理其他任务。</p>
+<p>在Web服务器方面，著名的Nginx也是采用此模式（事件驱动），避免了多线程的线程创建，线程上下文切换的开销</p>
+<p>在单核CPU系统之上我们采用单进程+单线程的模式来开发。在多核CPU系统上，可以通过<code>child_process.fork</code>开启多个进程，即多进程+单线程模式。注意：开启多进程不是为了解决高并发，主要是解决了单进程模式下Node.js CPU利用率不足的情况，充分利用多核CPU的性能。</p>
+<h3 id="Node-js中的进程"><a href="#Node-js中的进程" class="headerlink" title="Node.js中的进程"></a>Node.js中的进程</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>3.开发环境</category>
+        <category>8.nginx</category>
+        <category>1.进程和线程</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>进程和线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/1.%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/javascript%E4%B8%ADjs%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>加载和渲染过程</category>
+      </categories>
+      <tags>
+        <tag>3.javaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在浏览器地址栏键入url,按下回车之后会经历什么事</title>
+    <url>/2019/03/01/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/1.%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E9%94%AE%E5%85%A5url,%E6%8C%89%E4%B8%8B%E5%9B%9E%E8%BD%A6%E4%B9%8B%E5%90%8E%E4%BC%9A%E7%BB%8F%E5%8E%86%E4%BB%80%E4%B9%88%E4%BA%8B/</url>
+    <content><![CDATA[<h3 id="1-URL解析"><a href="#1-URL解析" class="headerlink" title="1.URL解析"></a>1.URL解析</h3><p>一个URL包括<code>协议，网络地址，资源路径</code></p>
+<p>协议：最常用的比如HTTP（超文本传输协议）FTP（文件传输协议）</p>
+<p>网络地址：可以是域名或者ip地址，包括端口号，如果没有默认为80端口</p>
+<p>如果是不合法的地址，会转给默认的搜索引擎，例如如果你正在使用chrome,可以在url输入框输入你想要的搜索内容，然后搜索引擎会根据关键字进行搜索</p>
+<h3 id="2-DNS域名解析"><a href="#2-DNS域名解析" class="headerlink" title="2.DNS域名解析"></a>2.DNS域名解析</h3><h4 id="1-先到各种缓存信息中查找"><a href="#1-先到各种缓存信息中查找" class="headerlink" title="1.先到各种缓存信息中查找"></a>1.先到各种缓存信息中查找</h4><p>先到浏览器缓存记录中查找—-浏览器会缓存DNS一段时间</p>
+<p>系统缓存—-如果浏览器中没有找到，浏览器会有一个系统调用，获得系统缓存中的记录</p>
+<p>路由缓存—接着讲请求发给路由器，路由器一般也有自己的DNS缓存</p>
+<h4 id="2-DNS服务器查找"><a href="#2-DNS服务器查找" class="headerlink" title="2.DNS服务器查找"></a>2.DNS服务器查找</h4><p>没有则发送请求到本地域名服务器，每一个本地域名服务器都维护一个高速缓存，存放最近用过的域名及其ip地址，如果还没有则发出递归查询（本地服务器请求比他高一级的服务器，如此递归直到根域名服务器，肯定能找到这个服务器的IP地址）通过这个IP可以找到客户端服务器端的唯一路径</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/2.dns/dns.png"></p>
+<h3 id="3-浏览器主机根据ip地址与服务器建立TCP连接"><a href="#3-浏览器主机根据ip地址与服务器建立TCP连接" class="headerlink" title="3.浏览器主机根据ip地址与服务器建立TCP连接"></a>3.浏览器主机根据ip地址与服务器建立TCP连接</h3><p>浏览器向服务器端发送SYN连接请求，经过服务器与浏览器三次报文的交互连接建立完成，就可以发送数据了。</p>
+<p>找到了正确的IP地址以后就要开始建立连接了，建立连接的过程一般会使用TCP协议，通过三次握手建立连接。</p>
+<h4 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h4><p>客户端发出建立连接的请求，数据包携带有SYN</p>
+<p>如果服务端有开放的端口，可以接受并建立连接，那么服务端会返回SYN+ACK，告诉客户端我可以接受你的请求。</p>
+<p>客户端收到服务端的回应，发送ACK给服务端，连接建立。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/2.dns/dns2.png"></p>
+<h3 id="4-发送HTTP请求"><a href="#4-发送HTTP请求" class="headerlink" title="4.发送HTTP请求"></a>4.发送HTTP请求</h3><p>与服务器建立了连接后，就可以向服务器发送请求了</p>
+<p>根据HTTP协议的要求，组织一个HTTP数据包，向服务器发送HTTP请求，HTTP的请求报头有请求行和请求报头，空行</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/2.dns/dns3.png"></p>
+<p>在浏览器中查看报文首部</p>
+<p>请求行包括请求方法，URI，HTTP版本。首部字段传递重要信息，包括请求首部字段，通用首部字段和实体首部字段。我们可以从报文中看到发出的请求的具体信息。具体每个首部字段的作用</p>
+<h3 id="5-服务器处理请求"><a href="#5-服务器处理请求" class="headerlink" title="5.服务器处理请求"></a>5.服务器处理请求</h3><p>服务器收到请求并响应，生成一个HTTP响应报文，通过TCP协议发送给浏览器主机</p>
+<p>通过HTTP请求服务器后，服务器会向浏览器返回一个应答信息—-HTTP响应。</p>
+<p>在HTTP里，有请求就会有响应，哪怕是错误信息，这里我们同样看下响应报文的组成结构。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/2.dns/dns4.png"></p>
+<p>在响应结果中都会有一个HTTP状态码，比如我们熟知的200、301、404、500等。通过这个状态码我们可以知道服务端的处理是否正常，并能了解具体的错误。</p>
+<p>状态码</p>
+<ul>
+<li>1xx：信息性状态码</li>
+<li>2xx：成功状态码</li>
+<li>3xx：重定向状态码</li>
+<li>4xx：客户端错误状态码</li>
+<li>5xx：服务端错误状态码</li>
+</ul>
+<h3 id="6-端开TCP连接"><a href="#6-端开TCP连接" class="headerlink" title="6.端开TCP连接"></a>6.端开TCP连接</h3><p>为了避免服务器与客户端双方的资源占用和损耗，当双方没有请求或响应传递时，任意一方都可以发起关闭请求。与创建TCP3次握手类似，关闭TCP连接时需要4次握手。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/2.dns/dns5.png"></p>
+<ul>
+<li><p>客户端发起中断请求，发送FIN到服务端</p>
+</li>
+<li><p>服务端收到请求，可能数据还没有发完，这个时候不会关闭socket,而是回复ACK，告诉客户端知道了</p>
+</li>
+<li><p>客户端进入Fin_Wait状态，继续等待服务端的FIN报文。服务端发送完毕后，回想客户端发送FIN</p>
+</li>
+<li><p>客户端收到回复后就回复ACK，并关闭连接</p>
+</li>
+</ul>
+<h3 id="7-浏览器解析文件"><a href="#7-浏览器解析文件" class="headerlink" title="7.浏览器解析文件"></a>7.浏览器解析文件</h3><p>浏览器通过解析HTML，生成DOM树，解析CSS，生成CSS规则树，然后通过DOM树和CSS规则树生成渲染树。渲染树与DOM树不同，渲染树总并没有head，dispaly为none等不必显示的节点。</p>
+<p>浏览器的解析过程并非是串连进行的，比如在解析CSS的同时，可以继续加重解析HTML，但在解析执行JS脚本时，会停止解析后续HTML，这就会出现阻塞问题</p>
+<h3 id="8-浏览器布局渲染"><a href="#8-浏览器布局渲染" class="headerlink" title="8.浏览器布局渲染"></a>8.浏览器布局渲染</h3><p>根据渲染树布局，计算CSS样式，即每个节点在页面中的大小和位置等几何信息，HTML默认是流式布局的,CSS和js会打破这种布局，改变DOM的外观样式以及大小和位置，这时就要提到两个重要概念：重排和重绘</p>
+<p>我们应该尽量减少重排和重绘，良好的css规范会减少这种操作</p>
+<p>最后浏览器绘制各个节点，将页面展示给用户</p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>加载和渲染过程</category>
+      </categories>
+      <tags>
+        <tag>3.在浏览器地址栏键入url,按下回车之后会经历什么事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>谷歌浏览器渲染原理</title>
+    <url>/2017/03/02/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/1.%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h3 id="页面渲染原理"><a href="#页面渲染原理" class="headerlink" title="页面渲染原理"></a>页面渲染原理</h3><p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%93.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p>一个页面展示在用户面前，简单来说，会经历以上 5 个步骤。我们可以把上面这个图称为<code>像素管道</code></p>
+<ul>
+<li><p>JavaScript：执行 js 逻辑，修改 DOM,修改 CSS 等。</p>
+</li>
+<li><p>Style:计算样式。</p>
+</li>
+<li><p>Layout:在知道对一个元素应用那些规则之后，浏览器即可开始计算它要占据的空间大小及其在屏幕的位置。这个步骤，就是我们常说的重排。</p>
+</li>
+<li><p>Paint:绘制是填充像素的过程。它涉及绘出文本、颜色、图像、边框和阴影，基本上包括元素的每个可视部分。绘制一般是在多个表面（通常称为层）上完成的。这个步骤，即使我们常说的重绘。</p>
+</li>
+<li><p>Composite:渲染层合并，由上一步可知，对页面中 DOM 元素的绘制是在多个层上进行的。在每个层上完成绘制过程之后，浏览器会将所有层按照合理的顺序合并成一个图层，然后显示在屏幕上。</p>
+<p>在浏览器器中，页面的渲染由浏览器的渲染进程完成，而渲染进程中，包含了主线程，worker 线程，Compositer 线程，Raster 线程。上述像素管道的 5 个过程总，前 4 个过程，都由主线程完成，最后一个步骤，主要有 Raster 线程、Compositer 线程完成。</p>
+</li>
+</ul>
+<h4 id="JavaScript、Style、Layout"><a href="#JavaScript、Style、Layout" class="headerlink" title="JavaScript、Style、Layout"></a>JavaScript、Style、Layout</h4><p>像素管道中的前三个步骤，JavaScript、Style 两个步骤如下：</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p>接着是 Layout,浏览器遍历 render tree 的每一个节点，计算其确切的位置和大小。最终形成一个 Layout Tree.</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%933.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<h4 id="Paint"><a href="#Paint" class="headerlink" title="Paint"></a>Paint</h4><p>在 Paint 之前，浏览器会根据 Layout Tree，确切需要绘制的对象的层级，我们可以把这个层级叫做<code>渲染层</code>，最终生成 Layout Tree。这个阶段被称作：<code>Update Layer Tree</code></p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%934.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p>在 Paint 这个阶段，浏览器会根据<code>Layout Tree</code>,生成 Paint Records.</p>
+<p>Paint Records 就是描述先画什么，再画什么的记录，跟我们写 canvas 代码时很像。Paint Records 是根据渲染层划分的。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%935.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p>尽管生成了 Paint Records,真正的绘制并不是 Paint 这个阶段完成的，而是在 Composite 阶段由 Raster 线程完成的。</p>
+<h4 id="Composite"><a href="#Composite" class="headerlink" title="Composite"></a>Composite</h4><p>经过之前的几个步骤，浏览器主线程已经将页面的内容分成了若干渲染层。为了提升性能，某些特定的渲染层，会被提升为<code>合成层</code>。我们可以通过下面两个 css 属性，将某个元素强制提升为合成层：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">will-change:transform;</span><br><span class="line">//或者</span><br><span class="line"><span class="attribute">transform</span>:<span class="built_in">translateZ</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>主线程在处理完所有的数据后，会把数据提交到 Compositer 线程。Compositer 线程会利用 Raster 线程来做光栅处理，并将处理好的内容存入内存中。随着 Compositer 线程完成渲染层合成操作，扔给 GPU,页面最终被渲染到屏幕上。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%936.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p>可以通过 Chrome 开发者工具中的 Layer 来查看合成层。</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%937.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<h4 id="其他像素管道"><a href="#其他像素管道" class="headerlink" title="其他像素管道"></a>其他像素管道</h4><p>上文中的像素管道共有 5 个步骤。不一定每帧都总是会经过管道每个部分的处理。实际上，不管是使用 JavaScript、CSS 还是网络动画，在实现视觉变化时，管道针对指定帧的运行还有其他两种方式：</p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%938.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<p><img src="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%939.png" alt="https://zhoubichuan.github.io/Note-Frontend/4.run/1.browser/1.loadingRender/1.render/%E6%B8%B2%E6%9F%932.png"></p>
+<ul>
+<li>第一种就是我们所说的页面没有进行重排，值进行了重绘；</li>
+<li>第二种就是页面即没有进行重排，也没有进行重绘</li>
+<li>最后的这种运行方式开销最小，适合于页面上的动画效果。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>2.谷歌浏览器渲染原理</category>
+      </categories>
+      <tags>
+        <tag>3.javaScript</tag>
+        <tag>谷歌浏览器渲染原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/06/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/2.%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/4.%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%9B%B4%E5%BF%AB/</url>
+    <content><![CDATA[<h1 id="1-防抖"><a href="#1-防抖" class="headerlink" title="1.防抖"></a>1.防抖</h1><h1 id="2-节流"><a href="#2-节流" class="headerlink" title="2.节流"></a>2.节流</h1><h1 id="vue-性能优化"><a href="#vue-性能优化" class="headerlink" title="vue 性能优化"></a>vue 性能优化</h1><h1 id="react-性能优化"><a href="#react-性能优化" class="headerlink" title="react 性能优化"></a>react 性能优化</h1>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>性能优化</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/03/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/2.%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/1.%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>性能优化</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/04/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/2.%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/2.%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%86%9B%E8%A7%84/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>性能优化</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2018/12/24/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/5.%E5%93%8D%E5%BA%94%E5%BC%8F/%E5%93%8D%E5%BA%94%E5%BC%8F-xxx/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>响应式</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2017/03/05/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/2.%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/3.%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E6%9B%B4%E5%BF%AB/</url>
+    <content><![CDATA[<h1 id="1-打包"><a href="#1-打包" class="headerlink" title="1.打包"></a>1.打包</h1><h1 id="2-压缩"><a href="#2-压缩" class="headerlink" title="2.压缩"></a>2.压缩</h1><h1 id="3-缓存"><a href="#3-缓存" class="headerlink" title="3.缓存"></a>3.缓存</h1>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>性能优化</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中js引擎的执行机制</title>
+    <url>/2018/12/24/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/1.%E6%B5%8F%E8%A7%88%E5%99%A8/4.%E5%85%BC%E5%AE%B9%E6%80%A7/4.%E5%85%BC%E5%AE%B9%E6%80%A7-xxx/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>运行环境</category>
+        <category>2.标准浏览器</category>
+        <category>兼容性</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mongodb使用教程</title>
+    <url>/2018/12/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/5.%E6%95%B0%E6%8D%AE%E5%BA%93/2.MongoDB/mongodb%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="Mongodb-使用"><a href="#Mongodb-使用" class="headerlink" title="Mongodb 使用"></a>Mongodb 使用</h1><h2 id="1-启动-mongodb"><a href="#1-启动-mongodb" class="headerlink" title="1.启动 mongodb"></a>1.启动 mongodb</h2><figure class="highlight taggerscript"><table><tr><td class="code"><pre><span class="line">mongod --config D:<span class="symbol">\M</span>ongoDB<span class="symbol">\e</span>tc<span class="symbol">\m</span>ongodb.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-数据库操作"><a href="#2-数据库操作" class="headerlink" title="2.数据库操作"></a>2.数据库操作</h2><h3 id="1-使用数据库"><a href="#1-使用数据库" class="headerlink" title="1.使用数据库"></a>1.使用数据库</h3><figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> database_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换到 school 数据库下</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">use</span> school</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看所有数据库"><a href="#2-查看所有数据库" class="headerlink" title="2.查看所有数据库"></a>2.查看所有数据库</h3><figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-查看当前使用的数据库"><a href="#3-查看当前使用的数据库" class="headerlink" title="3.查看当前使用的数据库"></a>3.查看当前使用的数据库</h3><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">db</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-删除数据库"><a href="#4-删除数据库" class="headerlink" title="4.删除数据库"></a>4.删除数据库</h3><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">db.dropDatabase<span class="comment">()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-集合操作"><a href="#3-集合操作" class="headerlink" title="3.集合操作"></a>3.集合操作</h2><h3 id="1-查看集合帮助"><a href="#1-查看集合帮助" class="headerlink" title="1.查看集合帮助"></a>1.查看集合帮助</h3><figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">db</span>.students.<span class="keyword">help</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看数据库下的集合"><a href="#2-查看数据库下的集合" class="headerlink" title="2.查看数据库下的集合"></a>2.查看数据库下的集合</h3><figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> collections</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-创建一个空集合"><a href="#3-创建一个空集合" class="headerlink" title="3.创建一个空集合"></a>3.创建一个空集合</h3><figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">db.create<span class="constructor">Collection(<span class="params">collection_Name</span>)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-创建集合并插入一个文档"><a href="#4-创建集合并插入一个文档" class="headerlink" title="4.创建集合并插入一个文档"></a>4.创建集合并插入一个文档</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">db<span class="selector-class">.collection_Name</span><span class="selector-class">.insert</span>(document)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插入文档"><a href="#4-插入文档" class="headerlink" title="4.插入文档"></a>4.插入文档</h2><h3 id="1-insert"><a href="#1-insert" class="headerlink" title="1.insert"></a>1.insert</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">db<span class="selector-class">.collection_name</span><span class="selector-class">.insert</span>(document)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-save"><a href="#2-save" class="headerlink" title="2.save"></a>2.save</h3><figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="keyword">db</span>.collection_name.<span class="keyword">save</span>(document)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-更新文档"><a href="#5-更新文档" class="headerlink" title="5.更新文档"></a>5.更新文档</h2><h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1.语法"></a>1.语法</h3><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">db.collection.update(</span><br><span class="line">    <span class="params">&lt;query&gt;</span>,</span><br><span class="line">    <span class="params">&lt;updateObj&gt;</span>,</span><br><span class="line">    &#123;</span><br><span class="line"><span class="symbol">        upsert:</span><span class="params">&lt;boolean&gt;</span>,</span><br><span class="line"><span class="symbol">        multi:</span><span class="params">&lt;boolean&gt;</span></span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-参数"><a href="#2-参数" class="headerlink" title="2.参数"></a>2.参数</h3><ul>
+<li>query 查询条件，指定要更新符合哪些条件的文档</li>
+<li>update 更新后的对象或指定一些更新的操作符<ul>
+<li>$set 直接指定更新后的值</li>
+<li>$inc 在原基础上累加</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>upsert 可选，这个参数的意思是，如果不存在符合条件的记录时是否插入 updateObj 默认是 false，不插入。</li>
+<li>multi 可选，mongodb 默认只更新查找到的第一条记录，如果这个参数为 true，就更新所有符合条件的记录。</li>
+</ul>
+<h3 id="3-upsert"><a href="#3-upsert" class="headerlink" title="3.upsert"></a>3.upsert</h3><h3 id="4-multi"><a href="#4-multi" class="headerlink" title="4.multi"></a>4.multi</h3><h2 id="6-更新操作符"><a href="#6-更新操作符" class="headerlink" title="6.更新操作符"></a>6.更新操作符</h2><h3 id="1-set"><a href="#1-set" class="headerlink" title="1.$set"></a>1.$set</h3><h3 id="2-inc"><a href="#2-inc" class="headerlink" title="2.$inc"></a>2.$inc</h3><h3 id="3-unset"><a href="#3-unset" class="headerlink" title="3.$unset"></a>3.$unset</h3><h3 id="4-push"><a href="#4-push" class="headerlink" title="4.$push"></a>4.$push</h3><h3 id="5-ne"><a href="#5-ne" class="headerlink" title="5.$ne"></a>5.$ne</h3><h3 id="6-addToSet"><a href="#6-addToSet" class="headerlink" title="6.$addToSet"></a>6.$addToSet</h3><h3 id="7-each"><a href="#7-each" class="headerlink" title="7.$each"></a>7.$each</h3><h3 id="8-pop"><a href="#8-pop" class="headerlink" title="8.$pop"></a>8.$pop</h3><h3 id="9-修改指定索引元素"><a href="#9-修改指定索引元素" class="headerlink" title="9.修改指定索引元素"></a>9.修改指定索引元素</h3><h2 id="7-文档删除"><a href="#7-文档删除" class="headerlink" title="7.文档删除"></a>7.文档删除</h2><h2 id="8-查询文档"><a href="#8-查询文档" class="headerlink" title="8.查询文档"></a>8.查询文档</h2><h2 id="9-与和或"><a href="#9-与和或" class="headerlink" title="9.与和或"></a>9.与和或</h2><h2 id="10-分页查询"><a href="#10-分页查询" class="headerlink" title="10.分页查询"></a>10.分页查询</h2><h2 id="11-执行脚本"><a href="#11-执行脚本" class="headerlink" title="11.执行脚本"></a>11.执行脚本</h2><h2 id="12-权限"><a href="#12-权限" class="headerlink" title="12.权限"></a>12.权限</h2><h2 id="13-索引"><a href="#13-索引" class="headerlink" title="13.索引"></a>13.索引</h2>]]></content>
+  </entry>
+  <entry>
+    <title>mongodb安装教程</title>
+    <url>/2018/12/30/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/4.%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/5.%E6%95%B0%E6%8D%AE%E5%BA%93/2.MongoDB/mongodb%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="Mongodb-安装"><a href="#Mongodb-安装" class="headerlink" title="Mongodb 安装"></a>Mongodb 安装</h1><h2 id="1-安装包"><a href="#1-安装包" class="headerlink" title="1.安装包"></a>1.安装包</h2><p>Windows 官方安装指南</p>
+<p>mongodb32 位安装版 链接: <a href="https://pan.baidu.com/s/1SHJ1vre_CQOE3u-W0zniqQ">https://pan.baidu.com/s/1SHJ1vre_CQOE3u-W0zniqQ</a> 密码: chan</p>
+<p>MongoDB64 位绿色版 链接: <a href="https://pan.baidu.com/s/1EkAB2SrcU1mfMfff_WDxtA">https://pan.baidu.com/s/1EkAB2SrcU1mfMfff_WDxtA</a> 密码: w913</p>
+<p>mongo 客户端 链接: <a href="https://pan.baidu.com/s/1YFxLZ-55D-WFR8os2fXN0A">https://pan.baidu.com/s/1YFxLZ-55D-WFR8os2fXN0A</a> 密码: 61qd</p>
+<h2 id="2-安装可视化工具"><a href="#2-安装可视化工具" class="headerlink" title="2.安装可视化工具"></a>2.安装可视化工具</h2><h3 id="Robomongo"><a href="#Robomongo" class="headerlink" title="Robomongo"></a>Robomongo</h3><p><a href="https://robomongo.org/?tdsourcetag=s_pcqq_aiomsg">https://robomongo.org/?tdsourcetag=s_pcqq_aiomsg</a></p>
+<h2 id="3-mongodb-启动与连接"><a href="#3-mongodb-启动与连接" class="headerlink" title="3.mongodb 启动与连接"></a>3.mongodb 启动与连接</h2><h3 id="1-找到-mongodb-安装目录，一般是-C-Program-Files-MongoDB-2-6-Standard-bin"><a href="#1-找到-mongodb-安装目录，一般是-C-Program-Files-MongoDB-2-6-Standard-bin" class="headerlink" title="1.找到 mongodb 安装目录，一般是 C:\Program Files\MongoDB 2.6 Standard\bin"></a>1.找到 mongodb 安装目录，一般是 C:\Program Files\MongoDB 2.6 Standard\bin</h3><h3 id="2-按下-Shift-鼠标右键，选择在此处打开命令窗口"><a href="#2-按下-Shift-鼠标右键，选择在此处打开命令窗口" class="headerlink" title="2.按下 Shift+鼠标右键，选择在此处打开命令窗口"></a>2.按下 Shift+鼠标右键，选择在此处打开命令窗口</h3><h3 id="3-在除-C-盘外的盘符新建一个空目录，如-D-Mongodb-data"><a href="#3-在除-C-盘外的盘符新建一个空目录，如-D-Mongodb-data" class="headerlink" title="3.在除 C 盘外的盘符新建一个空目录，如 D:\Mongodb\data"></a>3.在除 C 盘外的盘符新建一个空目录，如 D:\Mongodb\data</h3><h3 id="4-在命令行中输入-mongod-–dbpath-刚创建的空目录，如"><a href="#4-在命令行中输入-mongod-–dbpath-刚创建的空目录，如" class="headerlink" title="4.在命令行中输入 mongod –dbpath=刚创建的空目录，如"></a>4.在命令行中输入 mongod –dbpath=刚创建的空目录，如</h3><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">mongod <span class="attribute">--dbpath</span>=D:\Mongodb\data</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-再按回车键"><a href="#5-再按回车键" class="headerlink" title="5.再按回车键"></a>5.再按回车键</h3><ul>
+<li>如果出现 waiting for connections on port 27017 就表示启动成功，已经在 27017 端口上监听了客户端的请求</li>
+<li>注意：–dbpath 后的值表示数据库文件的存储路径，而且后面的路径必须事先创建好，必须已经存在，否则服务开启失败</li>
+<li>注意：这个命令窗体绝对不能不能关，关闭这个窗口就相当于停止了 mongodb 服务</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/01/18/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/1.%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1,%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1.%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.%E7%AE%97%E6%B3%95%E6%89%A7%E8%A1%8C%E7%9A%84%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h2 id="算法执行的环境"><a href="#算法执行的环境" class="headerlink" title="算法执行的环境"></a>算法执行的环境</h2><ul>
+<li>cpu+ 内存的模型</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Function数据类型知识点</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/3.%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2-4.Function%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>引用数据类型</category>
+        <category>Function</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>引用数据类型</tag>
+        <tag>Function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实现三栏布局</title>
+    <url>/2014/01/23/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/1.HTML/1.%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/</url>
+    <content><![CDATA[<h1 id="实现三栏布局"><a href="#实现三栏布局" class="headerlink" title="实现三栏布局"></a>实现三栏布局</h1><p><img src="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80.png" alt="img"></p>
+<h2 id="1-圣杯布局"><a href="#1-圣杯布局" class="headerlink" title="1.圣杯布局"></a>1.圣杯布局</h2><p>最外层用 padding 撑开，左右两边留有预设宽度，浮动，调整里面左右元素的相对定位值和 margin 值实现左右元素正好在预留宽度中</p>
+<h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span>中间部分<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span>左边<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span>右边<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">200px</span> <span class="number">0</span> <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span>,</span><br><span class="line"><span class="selector-class">.left</span>,</span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: yellow;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: green;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">right</span>: -<span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80.html">查看页面</a></p>
+<h2 id="2-双飞翼布局"><a href="#2-双飞翼布局" class="headerlink" title="2.双飞翼布局"></a>2.双飞翼布局</h2><p>里面的中间层用 padding 撑开，预留的左右位置，由左右元素通过 margin 调节</p>
+<h3 id="html-1"><a href="#html-1" class="headerlink" title="html"></a>html</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;container&quot;</span>&gt;中间&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;left&quot;</span>&gt;左边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;right&quot;</span>&gt;右边&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css-1"><a href="#css-1" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span>,</span><br><span class="line"><span class="selector-class">.left</span>,</span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">200px</span> <span class="number">0</span> <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: green;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80.html">查看页面</a></p>
+<h2 id="3-弹性盒子布局"><a href="#3-弹性盒子布局" class="headerlink" title="3.弹性盒子布局"></a>3.弹性盒子布局</h2><p>低版本浏览器不支持</p>
+<h3 id="html-2"><a href="#html-2" class="headerlink" title="html"></a>html</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;left&quot;</span>&gt;左边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;main&quot;</span>&gt;中间&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;right&quot;</span>&gt;右边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css-2"><a href="#css-2" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: green;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90.html">查看页面</a></p>
+<h2 id="4-calc-属性"><a href="#4-calc-属性" class="headerlink" title="4.calc 属性"></a>4.calc 属性</h2><p>中间的长度=100%宽度减去左右长度之和</p>
+<h3 id="html-3"><a href="#html-3" class="headerlink" title="html"></a>html</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;left&quot;</span>&gt;左边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;main&quot;</span>&gt;中间&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;right&quot;</span>&gt;右边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css-3"><a href="#css-3" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">500px</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/calc%E5%B1%9E%E6%80%A7.html">查看代码</a></p>
+<h2 id="5-box-sizing-属性"><a href="#5-box-sizing-属性" class="headerlink" title="5.box-sizing 属性"></a>5.box-sizing 属性</h2><p>将中间元素里面的元素变成怪异盒模型，这样就留出了左右位置，左右元素通过 margin 就占据左右位置</p>
+<h3 id="html-4"><a href="#html-4" class="headerlink" title="html"></a>html</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;container&quot;</span>&gt;中间&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;left&quot;</span>&gt;左边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;right&quot;</span>&gt;右边&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css-4"><a href="#css-4" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">200px</span> <span class="number">0</span> <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%AE%9E%E7%8E%B0%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/box-sizing.html">查看代码</a></p>
+<h2 id="6-绝对定位"><a href="#6-绝对定位" class="headerlink" title="6.绝对定位"></a>6.绝对定位</h2><p>中间用 padding 撑开或者 calc 计算出，两边用定位占据左右位置</p>
+<h3 id="html-5"><a href="#html-5" class="headerlink" title="html"></a>html</h3><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;main&quot;</span>&gt;中间部分&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;left&quot;</span>&gt;左边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;right&quot;</span>&gt;右边&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css-5"><a href="#css-5" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">200px</span> <span class="number">0</span> <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.left</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.right</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">background</span>: gray;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>1.HTML</category>
+        <category>1.三栏布局</category>
+      </categories>
+      <tags>
+        <tag>静态页面</tag>
+        <tag>html</tag>
+        <tag>css</tag>
+        <tag>布局</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>清除浮动</title>
+    <url>/2014/01/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/2.CSS/1.%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</url>
+    <content><![CDATA[<h1 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h1><ul>
+<li>浮动：父级出现塌陷<br><img src="/2014/01/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/2.CSS/1/%E6%B5%AE%E5%8A%A81.png" alt="image"></li>
+<li>清除浮动：<br><img src="/2014/01/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/2.CSS/1/%E6%B5%AE%E5%8A%A82.png" alt="image"></li>
+</ul>
+<h2 id="1-table"><a href="#1-table" class="headerlink" title="1.table"></a>1.table</h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">display</span>:table&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./table.html">查看代码</a></p>
+<h2 id="1-table-1"><a href="#1-table-1" class="headerlink" title="1.table"></a>1.table</h2><h3 id="html-1"><a href="#html-1" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css-1"><a href="#css-1" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">display</span>:table&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./table.html">查看代码</a></p>
+<h2 id="2-inline-block"><a href="#2-inline-block" class="headerlink" title="2.inline-block"></a>2.inline-block</h2><h3 id="html-2"><a href="#html-2" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css-2"><a href="#css-2" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">display</span>:inline-block&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./inline-block.html">查看代码</a></p>
+<h2 id="3-父级浮动"><a href="#3-父级浮动" class="headerlink" title="3.父级浮动"></a>3.父级浮动</h2><h3 id="html-3"><a href="#html-3" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css-3"><a href="#css-3" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">float</span><span class="selector-pseudo">:left</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./%E7%88%B6%E7%BA%A7%E6%B5%AE%E5%8A%A8.html">查看代码</a></p>
+<h2 id="4-overflow-hidden-auto"><a href="#4-overflow-hidden-auto" class="headerlink" title="4.overflow:hidden/auto"></a>4.overflow:hidden/auto</h2><h3 id="html-4"><a href="#html-4" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css-4"><a href="#css-4" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">overflow</span>:hidden&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span>&#123;<span class="attribute">overflow</span>:auto&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./overflow.html">查看代码</a></p>
+<h2 id="5-clear-both"><a href="#5-clear-both" class="headerlink" title="5.clear:both"></a>5.clear:both</h2><h3 id="html-5"><a href="#html-5" class="headerlink" title="html"></a>html</h3><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="section">&lt;ul&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line">    <span class="section">&lt;li&gt;</span><span class="section">&lt;/li&gt;</span></span><br><span class="line"><span class="section">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css-5"><a href="#css-5" class="headerlink" title="css"></a>css</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"> <span class="selector-tag">ul</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="./clear.html">查看代码</a></p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>2.CSS</category>
+        <category>1.清除浮动</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>清除浮动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3d旋转色子</title>
+    <url>/2014/01/26/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/2.CSS/2.3d%E6%97%8B%E8%BD%AC%E8%89%B2%E5%AD%90/</url>
+    <content><![CDATA[<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">li</span>&#123;<span class="attribute">list-style</span>: none; <span class="attribute">width</span>: <span class="number">100px</span>;<span class="attribute">height</span>: <span class="number">100px</span>;<span class="attribute">line-height</span>: <span class="number">100px</span>;<span class="attribute">text-align</span>: center;<span class="attribute">font-size</span>:<span class="number">80px</span> ;<span class="attribute">color</span>: white;<span class="attribute">position</span>: absolute;&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">body</span>&#123;<span class="attribute">display</span>: -webkit-flex;<span class="attribute">justify-content</span>: center;&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box0</span>&#123;<span class="attribute">width</span>: <span class="number">200px</span>;<span class="attribute">height</span>: <span class="number">200px</span>;<span class="attribute">transform-origin</span>:<span class="number">50%</span> <span class="number">50%</span> <span class="number">50px</span> ;<span class="attribute">position</span>: relative;</span></span><br><span class="line"><span class="css">		<span class="attribute">transform-style</span>:preserve-<span class="number">3</span>d ;<span class="attribute">animation</span>:rote  <span class="number">5s</span> ease-in infinite normal ;&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box1</span>&#123;<span class="attribute">top</span>:-<span class="number">50px</span> ;<span class="attribute">left</span>:<span class="number">50px</span> ;<span class="attribute">transform-origin</span>:bottom; <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(-<span class="number">90deg</span>);&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box2</span>&#123;<span class="attribute">top</span>:<span class="number">50px</span> ;<span class="attribute">left</span>:<span class="number">150px</span> ;<span class="attribute">transform-origin</span><span class="selector-pseudo">:left</span>;<span class="attribute">transform</span>: <span class="built_in">rotateY</span>(-<span class="number">90deg</span>);&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box3</span>&#123;<span class="attribute">top</span>:<span class="number">50px</span> ;<span class="attribute">left</span>:<span class="number">50px</span> ;&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box4</span>&#123;<span class="attribute">top</span>:<span class="number">50px</span> ;<span class="attribute">left</span>:<span class="number">50px</span> ;<span class="attribute">transform-origin</span><span class="selector-pseudo">:right</span> ;<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(<span class="number">100px</span>);&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box5</span>&#123;<span class="attribute">left</span>: -<span class="number">50px</span>;<span class="attribute">top</span>: <span class="number">50px</span>;<span class="attribute">transform-origin</span><span class="selector-pseudo">:right</span> ;<span class="attribute">transform</span>: <span class="built_in">rotateY</span>(<span class="number">90deg</span>);&#125;</span></span><br><span class="line"><span class="css">		<span class="selector-id">#box6</span>&#123;<span class="attribute">top</span>:<span class="number">150px</span> ;<span class="attribute">left</span>:<span class="number">50px</span> ;<span class="attribute">transform-origin</span>:top;<span class="attribute">transform</span>: <span class="built_in">rotateX</span>(<span class="number">90deg</span>);&#125;</span></span><br><span class="line"><span class="css">		<span class="keyword">@-webkit-keyframes</span> rote&#123;</span></span><br><span class="line"><span class="css">			<span class="number">0%</span>&#123;<span class="attribute">transform</span>: <span class="built_in">rotateX</span>(<span class="number">0deg</span>) <span class="built_in">rotateY</span>(<span class="number">0deg</span>);&#125;</span></span><br><span class="line"><span class="css">			<span class="number">100%</span>&#123;<span class="attribute">transform</span>: <span class="built_in">rotateX</span>(<span class="number">360deg</span>) <span class="built_in">rotateY</span>(<span class="number">360deg</span>);&#125;</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;box0&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box1&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box2&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box3&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box4&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box5&quot;</span>&gt;</span>5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;box6&quot;</span>&gt;</span>6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> li=<span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;li&#x27;</span>);</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> a=[<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;blue&#x27;</span>,<span class="string">&#x27;yellow&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;black&#x27;</span>]</span></span><br><span class="line"><span class="javascript">		<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;li.length;i++)&#123;</span></span><br><span class="line">			li[i].style.background=a[i];</span><br><span class="line">		&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>2.CSS</category>
+        <category>2.3d旋转色子</category>
+      </categories>
+      <tags>
+        <tag>css3</tag>
+        <tag>3d旋转色子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>水平垂直居中</title>
+    <url>/2014/01/26/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/3.W3C/2.CSS/3.%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/</url>
+    <content><![CDATA[<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>目前移动端已经完全可以使用 flex 了<br><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/flex.html">查看页面</a></p>
+<h2 id="absolute-transform"><a href="#absolute-transform" class="headerlink" title="absolute + transform"></a>absolute + transform</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>: translate(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/absolute+transform.html">查看页面</a></p>
+<h2 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin auto"></a>absolute + margin auto</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：需要知道子元素的宽高<br>[查看页面](<a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/absolute+margin">https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/absolute+margin</a> auto.html)</p>
+<h2 id="absolute-负-margin"><a href="#absolute-负-margin" class="headerlink" title="absolute + 负 margin"></a>absolute + 负 margin</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;<span class="number">123</span>&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">margin-top</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：需要知道子元素的宽高<br><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/absolute+%E8%B4%9Fmargin.html">查看页面</a></p>
+<h2 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: calc( <span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">	<span class="attribute">left</span>: calc( <span class="number">50%</span> - <span class="number">50px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：需要知道子元素的宽高<br><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/absolute+calc.html">查看页面</a></p>
+<h2 id="writing-mode"><a href="#writing-mode" class="headerlink" title="writing-mode"></a>writing-mode</h2><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;children&quot;</span>&gt;<span class="number">123</span>&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line"></span><br><span class="line">.box&#123;</span><br><span class="line">	width:<span class="number">200</span>px;</span><br><span class="line">	height:<span class="number">200</span>px;</span><br><span class="line">	border: <span class="number">1</span>px solid black;</span><br><span class="line">	writing-mode: vertical-lr;</span><br><span class="line">	<span class="built_in">text</span>-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.father &#123;</span><br><span class="line">	writing-mode: horizontal-tb;</span><br><span class="line">	display: inline-block;</span><br><span class="line">	<span class="built_in">text</span>-align:center;</span><br><span class="line">	width:<span class="number">100</span>%;</span><br><span class="line">&#125;</span><br><span class="line">.children &#123;</span><br><span class="line">	display:inline-block;</span><br><span class="line">	margin: auto;</span><br><span class="line">	<span class="built_in">text</span>-align: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/writing-mode.html">查看页面</a></p>
+<h2 id="table"><a href="#table" class="headerlink" title="table"></a>table</h2><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="params">&lt;table&gt;</span></span><br><span class="line">    <span class="params">&lt;tbody&gt;</span></span><br><span class="line">        <span class="params">&lt;tr&gt;</span></span><br><span class="line">            <span class="params">&lt;td class=&quot;father&quot;&gt;</span></span><br><span class="line">                <span class="params">&lt;div class=&quot;children&quot;&gt;</span><span class="number">123</span><span class="params">&lt;/div&gt;</span></span><br><span class="line">            <span class="params">&lt;/td&gt;</span></span><br><span class="line">        <span class="params">&lt;/tr&gt;</span></span><br><span class="line">    <span class="params">&lt;/tbody&gt;</span></span><br><span class="line"><span class="params">&lt;/table&gt;</span></span><br><span class="line"></span><br><span class="line">.<span class="class">father </span>&#123;</span><br><span class="line"><span class="symbol">    width:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">    height:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">    border:</span> <span class="number">1</span>px solid black;</span><br><span class="line">    text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.<span class="class">children </span>&#123;</span><br><span class="line"><span class="symbol">    display:</span> inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/table.html">查看页面</a></p>
+<h2 id="table-cell"><a href="#table-cell" class="headerlink" title="table-cell"></a>table-cell</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;<span class="number">123</span>&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">display</span>: table-cell;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/table-cell.html">查看页面</a></p>
+<h2 id="grid"><a href="#grid" class="headerlink" title="grid"></a>grid</h2><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="params">&lt;div class=&quot;father&quot;&gt;</span></span><br><span class="line">    <span class="params">&lt;div class=&quot;children&quot;&gt;</span><span class="number">123</span><span class="params">&lt;/div&gt;</span></span><br><span class="line"><span class="params">&lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line">.<span class="class">father </span>&#123;</span><br><span class="line"><span class="symbol">    width:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">    height:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">    border:</span> <span class="number">1</span>px solid black;</span><br><span class="line"><span class="symbol">    display:</span> grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.<span class="class">children </span>&#123;</span><br><span class="line">    align-self: center;</span><br><span class="line">    justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/grid.html">查看页面</a></p>
+<h2 id="lineheight"><a href="#lineheight" class="headerlink" title="lineheight"></a>lineheight</h2><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">div</span> class=<span class="string">&quot;father&quot;</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span> class=<span class="string">&quot;children&quot;</span>&gt;<span class="number">123</span>&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.children</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="attribute">line-height</span>: initial;</span><br><span class="line">    <span class="attribute">text-align</span>: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要将文字显示重置为想要的结果<br><a href="https://zhoubichuan.github.io/Note-Frontend/2.stand/2.W3C/2.css/3.%E5%B8%83%E5%B1%80/%E5%85%83%E7%B4%A0%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E5%B1%85%E4%B8%AD/lineheight.html">查看页面</a></p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>3.W3C</category>
+        <category>2.CSS</category>
+        <category>3.水平垂直居中</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>3d旋转色子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack 小案例</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/4.%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/1.webpack/3.%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83-4.%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7-webpack%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<h1 id="webpack-小案例"><a href="#webpack-小案例" class="headerlink" title="webpack 小案例"></a>webpack 小案例</h1><h2 id="1-搭建环境"><a href="#1-搭建环境" class="headerlink" title="1.搭建环境"></a>1.搭建环境</h2><h3 id="1-新建项目文件夹"><a href="#1-新建项目文件夹" class="headerlink" title="1.新建项目文件夹"></a>1.新建项目文件夹</h3><figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">mkdir webpack-eg</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-进入项目文件夹"><a href="#2-进入项目文件夹" class="headerlink" title="2.进入项目文件夹"></a>2.进入项目文件夹</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> webpack-eg</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-初始化项目"><a href="#3-初始化项目" class="headerlink" title="3.初始化项目"></a>3.初始化项目</h3><figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">npm</span> init -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装-webpack-依赖包-从-webpack4-0-开始需要同时安装-webpack-cli-打包工具上线后不需要所以为开发依赖"><a href="#4-安装-webpack-依赖包-从-webpack4-0-开始需要同时安装-webpack-cli-打包工具上线后不需要所以为开发依赖" class="headerlink" title="4.安装 webpack 依赖包(从 webpack4.0 开始需要同时安装 webpack-cli),打包工具上线后不需要所以为开发依赖"></a>4.安装 webpack 依赖包(从 webpack4.0 开始需要同时安装 webpack-cli),打包工具上线后不需要所以为开发依赖</h3><figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line">npm i webpack webpack-<span class="keyword">cli</span> -D</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-设置配置文件"><a href="#2-设置配置文件" class="headerlink" title="2.设置配置文件"></a>2.设置配置文件</h2><h3 id="新建-webpack-config-js"><a href="#新建-webpack-config-js" class="headerlink" title="新建 webpack.config.js"></a>新建 webpack.config.js</h3><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">const path = require(<span class="string">&quot;path&quot;</span>);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  <span class="comment">//入口，可以是相对路径</span></span><br><span class="line"><span class="symbol">  entry:</span> <span class="string">&quot;./src/index.js&quot;</span>,</span><br><span class="line">  <span class="comment">//输出的文件夹，只能是绝对路径</span></span><br><span class="line"><span class="symbol">  output:</span> &#123;</span><br><span class="line"><span class="symbol">    path:</span> path.join(__dirname, <span class="string">&quot;dist&quot;</span>),</span><br><span class="line">    <span class="comment">//打包后的文件名</span></span><br><span class="line"><span class="symbol">    filename:</span> <span class="string">&quot;bundle.js&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="symbol">  module:</span> &#123;&#125;,</span><br><span class="line"><span class="symbol">  plugins:</span> []</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-运行打包命令"><a href="#3-运行打包命令" class="headerlink" title="3.运行打包命令"></a>3.运行打包命令</h2><h3 id="1-第一种方式是通过配置-package-json-中的-script-“build”"><a href="#1-第一种方式是通过配置-package-json-中的-script-“build”" class="headerlink" title="1.第一种方式是通过配置 package.json 中的 script “build”"></a>1.第一种方式是通过配置 package.json 中的 script “build”</h3><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><figure class="highlight stata"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;</span><span class="keyword">Error</span>: <span class="keyword">no</span> <span class="keyword">test</span> specified\<span class="string">&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改后</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;build&quot;</span>: <span class="string">&quot;webpack --mode development&quot;</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="从-webpack4-0-开始-webpack-后面需要加-–mode-指定是生产模式（production）还是开发模式（development）-开发模式更加符合开发方式，日志调试等功能更加全面，生产模式更加符合生产要求，加密压缩等功能使代码更安全性能更高。"><a href="#从-webpack4-0-开始-webpack-后面需要加-–mode-指定是生产模式（production）还是开发模式（development）-开发模式更加符合开发方式，日志调试等功能更加全面，生产模式更加符合生产要求，加密压缩等功能使代码更安全性能更高。" class="headerlink" title="从 webpack4.0 开始 webpack 后面需要加 –mode 指定是生产模式（production）还是开发模式（development）;开发模式更加符合开发方式，日志调试等功能更加全面，生产模式更加符合生产要求，加密压缩等功能使代码更安全性能更高。"></a>从 webpack4.0 开始 webpack 后面需要加 –mode 指定是生产模式（production）还是开发模式（development）;开发模式更加符合开发方式，日志调试等功能更加全面，生产模式更加符合生产要求，加密压缩等功能使代码更安全性能更高。</h4><ul>
+<li>运行</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">npm <span class="builtin-name">run</span> build</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-第二种方式是通过-npx-可以直接运行-node-modules-bin-目录下的命令"><a href="#2-第二种方式是通过-npx-可以直接运行-node-modules-bin-目录下的命令" class="headerlink" title="2.第二种方式是通过 npx 可以直接运行 node_modules/.bin 目录下的命令"></a>2.第二种方式是通过 npx 可以直接运行 node_modules/.bin 目录下的命令</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>3.开发环境</category>
+        <category>4.构建工具</category>
+        <category>1.webpack</category>
+      </categories>
+      <tags>
+        <tag>1.webpack</tag>
+        <tag>入门</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Number 数据类型知识点</title>
+    <url>/2018/12/24/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.Number%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="number-数据类型知识点"><a href="#number-数据类型知识点" class="headerlink" title="number 数据类型知识点"></a>number 数据类型知识点</h1><h2 id="1-js-中等号的三种情况"><a href="#1-js-中等号的三种情况" class="headerlink" title="1.js 中等号的三种情况"></a>1.js 中等号的三种情况</h2><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">=</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断左右两边的值是否相等"><a href="#判断左右两边的值是否相等" class="headerlink" title="判断左右两边的值是否相等"></a>判断左右两边的值是否相等</h3><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">=<span class="ruby">=</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="判断左右两边的值是否觉得相等（包含数据类型）"><a href="#判断左右两边的值是否觉得相等（包含数据类型）" class="headerlink" title="判断左右两边的值是否觉得相等（包含数据类型）"></a>判断左右两边的值是否觉得相等（包含数据类型）</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="comment">===</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-number-包含正数、负数、零、小数、NaN"><a href="#2-number-包含正数、负数、零、小数、NaN" class="headerlink" title="2.number 包含正数、负数、零、小数、NaN"></a>2.number 包含正数、负数、零、小数、NaN</h2><h3 id="NaN-不是一个数，但是属于-number-数据类型"><a href="#NaN-不是一个数，但是属于-number-数据类型" class="headerlink" title="NaN 不是一个数，但是属于 number 数据类型"></a>NaN 不是一个数，但是属于 number 数据类型</h3><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">typeof NaN</span><br><span class="line"><span class="regexp">//</span><span class="string">&quot;number&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-把其他数据类型转换成-number"><a href="#3-把其他数据类型转换成-number" class="headerlink" title="3.把其他数据类型转换成 number"></a>3.把其他数据类型转换成 number</h2><h3 id="1-严格转换：Number"><a href="#1-严格转换：Number" class="headerlink" title="1.严格转换：Number()"></a>1.严格转换：Number()</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(true)</span></span></span><br><span class="line"><span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(false)</span></span></span><br><span class="line"><span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(null)</span></span></span><br><span class="line"><span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(<span class="string">&quot;&quot;</span>)</span></span></span><br><span class="line"><span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>undefined 是不能转换为有效数字</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(undefined)</span></span></span><br><span class="line"><span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(<span class="string">&#x27;12&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//12</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是把一个字符串转换为数字，只有字符串中的每一个字符都是有效数字字符，才可以正常转换，相反只要有一个不是有效数字字符(除了空格符)，最后结构就是 NaN</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(<span class="string">&#x27;12px&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">Number</span><span class="params">(<span class="string">&#x27;  1 &#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-非严格转换"><a href="#2-非严格转换" class="headerlink" title="2.非严格转换"></a>2.非严格转换</h3><h3 id="parseInt-parseFloat-从左到右一次查找，把有效的数字字符转换为数字，但是一旦遇到一个非有效的数字字符，立即停止查找（不管后面是否还有都不再查找了）"><a href="#parseInt-parseFloat-从左到右一次查找，把有效的数字字符转换为数字，但是一旦遇到一个非有效的数字字符，立即停止查找（不管后面是否还有都不再查找了）" class="headerlink" title="parseInt/parseFloat 从左到右一次查找，把有效的数字字符转换为数字，但是一旦遇到一个非有效的数字字符，立即停止查找（不管后面是否还有都不再查找了）"></a>parseInt/parseFloat 从左到右一次查找，把有效的数字字符转换为数字，但是一旦遇到一个非有效的数字字符，立即停止查找（不管后面是否还有都不再查找了）</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">parseInt</span><span class="params">(<span class="string">&#x27;12px&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//12</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">parseInt</span><span class="params">(<span class="string">&#x27;12px13&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//12</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">parseInt</span><span class="params">(<span class="string">&#x27;px12&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">parseInt</span><span class="params">(<span class="string">&#x27;12.5px&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//12.5</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">parseFloat</span><span class="params">(<span class="string">&#x27;12.5px&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//12.5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-数字常用的方法"><a href="#4-数字常用的方法" class="headerlink" title="4.数字常用的方法"></a>4.数字常用的方法</h2><h3 id="toFixed-n-保留小数点后面-n-位"><a href="#toFixed-n-保留小数点后面-n-位" class="headerlink" title="toFixed(n):保留小数点后面 n 位"></a>toFixed(n):保留小数点后面 n 位</h3><figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">num</span>=<span class="number">3.1415</span></span><br><span class="line"><span class="built_in">num</span>.toFixed(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//3.14</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-检测是否为有效数字"><a href="#5-检测是否为有效数字" class="headerlink" title="5.检测是否为有效数字"></a>5.检测是否为有效数字</h2><h3 id="isNaN-用来检测是否为有效数字的方法，如果当前的值是有效数字返回的结果是-false-如果不是有效数字，返回的结果是-true"><a href="#isNaN-用来检测是否为有效数字的方法，如果当前的值是有效数字返回的结果是-false-如果不是有效数字，返回的结果是-true" class="headerlink" title="isNaN()用来检测是否为有效数字的方法，如果当前的值是有效数字返回的结果是 false,如果不是有效数字，返回的结果是 true"></a>isNaN()用来检测是否为有效数字的方法，如果当前的值是有效数字返回的结果是 false,如果不是有效数字，返回的结果是 true</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">isNaN</span><span class="params">(<span class="number">12</span>)</span></span></span><br><span class="line"><span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">isNaN</span><span class="params">(<span class="string">&#x27;qwer&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果检测的值不是 number 类型的，浏览器会默认先通过 Number 把它强制转换为 number 类型，然后再检测是否为有效数字</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">isNaN</span><span class="params">(<span class="string">&#x27;12&#x27;</span>)</span></span></span><br><span class="line"><span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>基本数据类型</category>
+        <category>1.Number 数据类型知识点</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>number</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String 数据类型知识点</title>
+    <url>/2018/12/25/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.String%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<p>//String:字符串类</p>
+<p>//js中的对象就是一个泛指，所有东西都是对象，类时把这个泛指具体细分：Object、Array、RegExp、Date、String、Node这些都是js中的内置类，实列是类中的一个具体的东西</p>
+<p>var string = “hello”;<br>//一个字符串是由多个字符组成的<br>//str.length 获取字符串中的个数（字符串长度）<br>//字符串中也存在索引，也是从0开始的，”w”这个字符的索引就是0<br>//空格、换行这些特殊的符号也是一个字符</p>
+<p>//1、chartAt(索引)获取指定索引位置的字符<br>// for (var i = 0; i &lt; str.length; i++) {<br>//   console.log(str.chartAt(i));<br>// }<br>//charCodeAt（索引）获取指定索引位置的字符对应的ASCII值<br>// for (var i = 0; i &lt; str.length; i++) {<br>//   console.log(str.charCodetAt(i));<br>// }</p>
+<p>//2、字符串的截取<br>//substr(n,m)，从索引n开始截取m个字符<br>//substring(n,m)从索引n开发，找到索引m处（不包含m），将找到的字符串返回<br>//slice（n,m）从索引n开始，找到索引m处（不包含m），将找到的字符串返回 slice支持负数作为索引，str.length+负数索引<br>//slice（n）没有m代表截取到末尾</p>
+<p>//3、字符串中位置查找<br>//indexOf（字符）获取指定字符在字符串中第一次出现的索引位置<br>//lastIndexOf（字符）：y获取指定字符在字符串中最后一次出现索引的位置<br>//如果没有这个字符，返回-1，可以判断字符串中是否包含某个字符</p>
+<p>string.indexOf(“h”);<br>string.lastIndexOf(“h”);</p>
+<p>//4、大小写转换<br>//toLowerCase：将所有字符转换为小写<br>//toUpperCase：将所有字符转换为大写</p>
+<p>//5、替换<br>//replace（要替换的老字符，替换成新字符）<br>//在不使用正则的情况下每一次调用方法只能替换一次<br>string.replace(“老的”, “新的”);</p>
+<p>string.replace(/老的/g, “新的”);</p>
+<p>//6、将字符串按照指定的分隔符拆分为数组<br>//splice<br>var s = “1+2+3+4+5”;<br>console.log(s.split(“+”));<br>console.log(s.split(“”));<br>console.log(s.split(“ “));</p>
+<p>//7、match<br>var time = “2018-02-03 12:03:09”;<br>//2018年02月03日 12时03分09秒</p>
+<p>//思路一<br>function zero(value) {<br>  return value &lt; 10 ? “0” + value : value;<br>}<br>function formatTime(timeStr) {<br>  var ary = timeStr.split(“ “);<br>  var str1 = ary[0];<br>  var str2 = ary[1];<br>  var ary1 = str1.split(“-“);<br>  var ary2 = str2.split(“:”);<br>  return (<br>    ary1[0] +<br>    “年” +<br>    ary1[1] +<br>    “月” +<br>    ary1[2] +<br>    “日” +<br>    ary2[0] +<br>    “时” +<br>    ary2[1] +<br>    “分” +<br>    ary2[2] +<br>    “秒”<br>  );<br>}</p>
+<p>console.log(formatTime(time));</p>
+<p>//思路二：直接用replace一个个替换（没办法补充0）</p>
+<p>//思路三:用正则</p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>基本数据类型</category>
+        <category>2.String 数据类型知识点</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>number</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Boolean 数据类型知识点</title>
+    <url>/2018/12/26/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/3.Boolean%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>基本数据类型</category>
+        <category>3.Boolean 数据类型知识点</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>number</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>undefined数据类型知识点</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/5.Undefined%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>基本数据类型</category>
+        <category>5.undefined 数据类型知识点</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>number</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>typeof vs instanceof</title>
+    <url>/2018/12/27/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/typeof%20vs%20instanceof/</url>
+    <content><![CDATA[<p>对于原始类型来说，直接用 instanceof 来判断类型是不行的，我们可以改造</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrimitiveString</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> [<span class="built_in">Symbol</span>.hasInstance](x) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> x === <span class="string">&quot;string&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;hhhh&quot;</span> <span class="keyword">instanceof</span> PrimitiveString);</span><br></pre></td></tr></table></figure>
+
+<p>你可能不知道 Symbol.hasInstance 是什么东西，其实就是一个能<br>让我们自定义 instanceof 行为的东西，以上代码等同于 typeof ‘hhh’ === ‘string’,所以结果自然是 true 了</p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>基本数据类型</category>
+        <category>4.typeof vs instanceof</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>typeof vs instanceof</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Array数据类型知识点</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.Array%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>引用数据类型</category>
+        <category>Array</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>基本数据类型</tag>
+        <tag>number</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Function数据类型知识点</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/3.Function%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>引用数据类型</category>
+        <category>Function</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>引用数据类型</tag>
+        <tag>Function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Object数据类型知识点</title>
+    <url>/2018/12/29/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/2.%E6%A0%87%E5%87%86/1.ECMA/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/2.Object%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>2.标准</category>
+        <category>ECMA</category>
+        <category>数据类型</category>
+        <category>引用数据类型</category>
+        <category>Object</category>
+      </categories>
+      <tags>
+        <tag>数据类型</tag>
+        <tag>引用数据类型</tag>
+        <tag>Object</tag>
+      </tags>
+  </entry>
+</search>
